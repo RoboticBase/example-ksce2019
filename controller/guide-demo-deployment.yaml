@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guide-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: guide-demo
+  template:
+    metadata:
+      labels:
+        app: guide-demo
+    spec:
+      containers:
+      - name: fiware-guide-demo
+        image: roboticbase/fiware-guide-demo:0.0.1
+        imagePullPolicy: Always
+        env:
+        - name: LOG_LEVEL
+          value: "DEBUG"
+        - name: LISTEN_PORT
+          value: "3000"
+        - name: ORION_ENDPOINT
+          value: "http://orion:1026"
+        - name: FIWARE_SERVICE
+          value: "${FIWARE_SERVICE}"
+        - name: MOBILE_ROBOT_SERVICEPATH
+          value: "${MOBILE_ROBOT_SERVICEPATH}"
+        - name: MOBILE_ROBOT_TYPE
+          value: "${MOBILE_ROBOT_TYPE}"
+        - name: MOBILE_ROBOT_ID
+          value: "${MOBILE_ROBOT_ID}"
+        - name: DEST_LED_SERVICEPATH
+          value: "${DEST_LED_SERVICEPATH}"
+        - name: DEST_LED_TYPE
+          value: "${DEST_LED_TYPE}"
+        - name: DEST_LED_ID
+          value: "${DEST_LED_ID}"
+        - name: NEIGHBOR_RADIUS
+          value: "${NEIGHBOR_RADIUS}"
+        - name: LED_ON_X
+          value: "${LED_ON_X}"
+        - name: LED_ON_Y
+          value: "${LED_ON_Y}"
+        ports:
+          - name: guide-demo
+            containerPort: 3000

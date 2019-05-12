@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: guide-demo
+  labels:
+    app: guide-demo
+spec:
+  type: ClusterIP
+  selector:
+    app: guide-demo
+  ports:
+  - name: guide-demo
+    port: 3000
+    targetPort: 3000
