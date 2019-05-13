@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fiware-guide-demo
-        image: roboticbase/fiware-guide-demo:0.0.1
+        image: roboticbase/fiware-guide-demo:0.0.2
         imagePullPolicy: Always
         env:
         - name: LOG_LEVEL
