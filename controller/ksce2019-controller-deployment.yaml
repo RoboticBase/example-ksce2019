@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: guide-demo
+  name: controller
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: guide-demo
+      app: controller
   template:
     metadata:
       labels:
-        app: guide-demo
+        app: controller
     spec:
       containers:
-      - name: fiware-guide-demo
-        image: roboticbase/fiware-guide-demo:0.0.3
+      - name: controller
+        image: acrksce2019.azurecr.io/roboticbase/ksce2019-controller:0.0.1
         imagePullPolicy: Always
         env:
         - name: LOG_LEVEL
@@ -31,18 +31,8 @@ spec:
           value: "${MOBILE_ROBOT_TYPE}"
         - name: MOBILE_ROBOT_ID
           value: "${MOBILE_ROBOT_ID}"
-        - name: DEST_LED_SERVICEPATH
-          value: "${DEST_LED_SERVICEPATH}"
-        - name: DEST_LED_TYPE
-          value: "${DEST_LED_TYPE}"
-        - name: DEST_LED_ID
-          value: "${DEST_LED_ID}"
-        - name: NEIGHBOR_RADIUS
-          value: "${NEIGHBOR_RADIUS}"
-        - name: LED_ON_X
-          value: "${LED_ON_X}"
-        - name: LED_ON_Y
-          value: "${LED_ON_Y}"
+        - name: ZAICO_TOKEN
+          value: "${ZAICO_TOKEN}"
         ports:
-          - name: guide-demo
+          - name: controller
             containerPort: 3000
