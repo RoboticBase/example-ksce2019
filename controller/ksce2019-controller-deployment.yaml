@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: controller
-        image: acrksce2019.azurecr.io/roboticbase/ksce2019-controller:0.0.1
+        image: roboticbase/ksce2019-controller:0.1.0
         imagePullPolicy: Always
         env:
         - name: LOG_LEVEL
