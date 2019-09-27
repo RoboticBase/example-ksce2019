@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: controller
+  labels:
+    app: controller
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name:  controller-mapping
+      prefix: /
+      host: "^web\\..+$"
+      host_regex: true
+      service: http://controller:3000
+spec:
+  type: ClusterIP
+  selector:
+    app: controller
+  ports:
+  - name: controller
+    port: 3000
+    targetPort: 3000

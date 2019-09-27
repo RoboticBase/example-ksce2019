@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: controller
+  template:
+    metadata:
+      labels:
+        app: controller
+    spec:
+      containers:
+      - name: controller
+        image: roboticbase/ksce2019-controller:0.1.0
+        imagePullPolicy: Always
+        env:
+        - name: LOG_LEVEL
+          value: "DEBUG"
+        - name: LISTEN_PORT
+          value: "3000"
+        - name: ORION_ENDPOINT
+          value: "http://orion:1026"
+        - name: FIWARE_SERVICE
+          value: "${FIWARE_SERVICE}"
+        - name: MOBILE_ROBOT_SERVICEPATH
+          value: "${MOBILE_ROBOT_SERVICEPATH}"
+        - name: MOBILE_ROBOT_TYPE
+          value: "${MOBILE_ROBOT_TYPE}"
+        - name: MOBILE_ROBOT_ID
+          value: "${MOBILE_ROBOT_ID}"
+        - name: ZAICO_TOKEN
+          value: "${ZAICO_TOKEN}"
+        ports:
+          - name: controller
+            containerPort: 3000
